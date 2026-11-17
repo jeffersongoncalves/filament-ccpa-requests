@@ -2,11 +2,25 @@
 
 namespace JeffersonGoncalves\Filament\CcpaRequests;
 
-use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Model;
+use JeffersonGoncalves\Ccpa\Ccpa;
+use JeffersonGoncalves\Filament\CcpaRequests\Resources\ConsumerRequests\ConsumerRequestResource;
+use JeffersonGoncalves\FilamentPluginCore\BasePlugin;
 
-class CcpaRequestsPlugin implements Plugin
+class CcpaRequestsPlugin extends BasePlugin
 {
+    protected ?string $navigationGroup = null;
+
+    protected ?int $navigationSort = null;
+
+    protected string $navigationIcon = 'heroicon-o-shield-check';
+
+    protected string $slug = 'data-subject-requests';
+
+    /** @var list<class-string<Model>>|null */
+    protected ?array $subjectModels = null;
+
     public function getId(): string
     {
         return 'filament-ccpa-requests';
@@ -14,19 +28,76 @@ class CcpaRequestsPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
+        $panel->resources([
+            ConsumerRequestResource::class,
+        ]);
     }
 
-    public function boot(Panel $panel): void
+    public function navigationGroup(?string $group): static
     {
+        $this->navigationGroup = $group;
+
+        return $this;
     }
 
-    public static function make(): static
+    public function getNavigationGroup(): ?string
     {
-        return app(static::class);
+        return $this->navigationGroup;
     }
 
-    public static function get(): static
+    public function navigationSort(?int $sort): static
     {
-        return filament(app(static::class)->getId());
+        $this->navigationSort = $sort;
+
+        return $this;
+    }
+
+    public function getNavigationSort(): ?int
+    {
+        return $this->navigationSort;
+    }
+
+    public function navigationIcon(string $icon): static
+    {
+        $this->navigationIcon = $icon;
+
+        return $this;
+    }
+
+    public function getNavigationIcon(): string
+    {
+        return $this->navigationIcon;
+    }
+
+    public function slug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Models a request can be linked to when verifying the requester. Defaults to laravel-ccpa's `ccpa.models`.
+     *
+     * @param  list<class-string<Model>>  $models
+     */
+    public function subjectModels(array $models): static
+    {
+        $this->subjectModels = $models;
+
+        return $this;
+    }
+
+    /**
+     * @return list<class-string<Model>>
+     */
+    public function getSubjectModels(): array
+    {
+        return $this->subjectModels ?? app(Ccpa::class)->models();
     }
 }
