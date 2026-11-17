@@ -1,10 +1,10 @@
 <div class="filament-hidden">
 
-![Filament CCPA DSAR](https://raw.githubusercontent.com/jeffersongoncalves/filament-ccpa-requests/3.x/art/jeffersongoncalves-filament-ccpa-requests.png)
+![Filament CCPA Requests](https://raw.githubusercontent.com/jeffersongoncalves/filament-ccpa-requests/3.x/art/jeffersongoncalves-filament-ccpa-requests.png)
 
 </div>
 
-# Filament CCPA DSAR
+# Filament CCPA Requests
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jeffersongoncalves/filament-ccpa-requests.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-ccpa-requests)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-ccpa-requests/tests.yml?branch=3.x&label=tests&style=flat-square)](https://github.com/jeffersongoncalves/filament-ccpa-requests/actions?query=workflow%3Atests+branch%3A3.x)
